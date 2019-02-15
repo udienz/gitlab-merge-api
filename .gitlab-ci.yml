@@ -14,7 +14,7 @@ build-nginx:
     stage: build
     except:
         refs:
-            - production
+            - master
     script:
      - docker build -t nginx-stretch $CI_PROJECT_DIR/nginx-stretch
      - docker tag nginx-stretch udienz/nginx:stretch
