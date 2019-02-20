@@ -10,14 +10,16 @@ stages:
 before_script:
  - docker info
 
-build-nginx:
+build-docker:
     stage: build
     except:
         refs:
             - master
     script:
-     - docker build -t nginx-stretch $CI_PROJECT_DIR/nginx-stretch
-     - docker tag nginx-stretch udienz/nginx:stretch
+     - docker build -t gitlab-merge-resource .
+     - docker tag gitlab-merge-resource udienz/gitlab-merge-resource:latest
+     - docker login -u="$DOCKERUSER" -p="$DOCKERPASS"
+     - docker push udienz/gitlab-merge-resource:latest
 
 openmerge:
     image: udienz/gitlab-merge-resource
@@ -27,6 +29,6 @@ openmerge:
         refs:
             - master
     script:
-        - HOST=${CI_PROJECT_URL} CI_PROJECT_ID=${CI_PROJECT_ID} CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME} GITLAB_USER_ID=${GITLAB_USER_ID} PRIVATE_TOKEN=${PRIVATE_TOKEN} $CI_PROJECT_DIR/utils/merge.sh
+        - HOST=${CI_PROJECT_URL} CI_PROJECT_ID=${CI_PROJECT_ID} CI_COMMIT_REF_NAME=${CI_COMMIT_REF_NAME} GITLAB_USER_ID=${GITLAB_USER_ID} GITLAB_PRIVATE_TOKEN=${GITLAB_PRIVATE_TOKEN} $CI_PROJECT_DIR/utils/merge.sh
     when: on_success
 
