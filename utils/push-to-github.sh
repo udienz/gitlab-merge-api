@@ -27,7 +27,7 @@ BODY="{
     \"context\": \"continous-integration/gitlab-ci\"
 }";
 
-curl -X "POST https://api.github.com/repos/${GITHUB_REPO}/statuses/${CI_COMMIT_SHA}" \
+curl -X POST "https://api.github.com/repos/${GITHUB_REPO}/statuses/${CI_COMMIT_SHA}" \
     --header "Authorization: token ${GITHUB_TOKEN}" \
     --header "Content-Type: application/json" \
     --data "${BODY}";
