@@ -15,9 +15,14 @@ build-docker:
     except:
         refs:
             - master
+    only:
+        changes:
+            - Dockerfile
     script:
      - docker build -t gitlab-merge-resource .
      - docker tag gitlab-merge-resource udienz/gitlab-merge-resource:latest
+     - docker login -u="$DOCKERUSER" -p="$DOCKERPASS"
+     - docker push udienz/gitlab-merge-resource:latest
 
 openmerge:
     image: udienz/gitlab-merge-resource
