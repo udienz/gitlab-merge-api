@@ -19,7 +19,7 @@ Download below files and add into your `GIT_REPO/utils`
 1. Edit your `.gitlab-ci.yml` and add below line
 ```
 include:
- - remote: 'https://gitlab.com/udienz/gitlab-merge-api/blob/master/template/create-merge.yml'
+ - remote: 'https://gitlab.com/udienz/gitlab-merge-api/raw/master/template/create-merge.yml'
 ```
 
 [Personal access token]: https://gitlab.com/help/user/profile/personal_access_tokens.md
