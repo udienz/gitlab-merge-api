@@ -22,7 +22,7 @@ STATUS=$1
 # POST /repos/:owner/:repo/statuses/:sha
 BODY="{
     \"state\": \"${STATUS}\",
-    \"target_url\": \"${CI_PROJECT_URL}/commits/master\",
+    \"target_url\": \"${CI_PROJECT_URL}/commits/${CI_COMMIT_SHA}\",
     \"description\": \"The build is ${STATUS}ed\",
     \"context\": \"continous-integration/gitlab-ci\"
 }";
